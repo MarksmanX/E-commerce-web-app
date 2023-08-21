@@ -1,0 +1,43 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+<div class="container">
+  <h2>Place a Bid</h2>
+  <form method="post" class="form-horizontal">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="bid-amount">Bid Amount:</label>
+      <input type="number" class="form-control" id="bid_amount" name="bid_amount" placeholder="Enter new bid" step="0.01" min="0" required>
+      {% comment %} change this input to what it needs to be a current bid {% endcomment %}
+      {{ form.bid_amount }}
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+
+{% block css %}
+<style>
+  .container {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  h2 {
+    margin-bottom: 30px;
+  }
+  .form-horizontal {
+    max-width: 600px;
+    margin: auto;
+  }
+  .form-group label {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  .form-control {
+    margin-bottom: 15px;
+  }
+  .btn-primary {
+    margin-top: 15px;
+  }
+</style>
+{% endblock %}
+{% endblock %}

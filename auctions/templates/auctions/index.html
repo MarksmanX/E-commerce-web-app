@@ -1,0 +1,25 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h2>Active Listings</h2>
+    {% for item in items %}
+    <div class="card">
+        <div class="card-header">
+          <h5 class="card-title">{{ item.title }}</h5>
+          <p class="card-subtitle">{{ item.category }}</p>
+         <!-- <p class="card-subtitle">Added by {{ item.seller.username }}</p> --> 
+        </div>
+        <img src="{{ item.image.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="card-text">{{ item.description }}</p>
+          <p class="card-text">Starting Bid: {{ item.starting_price }}</p>
+          <p class="card-text">Current Bid: {{ item.current_bid }}</p>
+          <form method="get" action="{% url 'bid' item_id=item.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="item_id" value="{{ item.id }}">
+            <button type="submit" class="btn btn-primary">Bid</button>
+          </form>  
+        </div>
+      </div> 
+    {% endfor %}  
+{% endblock %}
